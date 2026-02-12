@@ -1,0 +1,29 @@
+{
+  "name": "@macro-meals/posthog-react-tracking",
+  "version": "1.0.0",
+  "description": "React (web) PostHog tracking library — Provider and usePosthog hook",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "posthog-js": ">=1.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "posthog-js": "^1.100.0",
+    "react": "^18.2.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "license": "MIT",
+  "private": true
+}
