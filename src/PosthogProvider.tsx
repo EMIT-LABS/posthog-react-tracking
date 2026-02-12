@@ -31,7 +31,13 @@ export const PosthogProvider: React.FC<PosthogProviderProps> = ({
   children,
 }) => {
   const client = useMemo(() => {
+    if (typeof window === 'undefined') {
+      return null;
+    }
     if (!apiKey || apiKey === 'undefined') {
+      return null;
+    }
+    if (typeof posthog.init !== 'function') {
       return null;
     }
     const initOptions: Record<string, unknown> = {
