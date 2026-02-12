@@ -1,5 +1,15 @@
 import type React from 'react';
 
+/** Session replay config (web). Aligns with posthog-js SessionRecordingOptions masking. Use blockSelector: 'img' to mask images. */
+export interface SessionReplayConfig {
+  /** Mask all input fields (equivalent to maskAllTextInputs in React Native) */
+  maskAllInputs?: boolean;
+  /** CSS selector for elements whose text should be masked */
+  maskTextSelector?: string | null;
+  /** CSS selector for elements to block from recording (e.g. 'img' to mask images) */
+  blockSelector?: string | null;
+}
+
 export interface PosthogProviderProps {
   /** PostHog project API key (e.g. phc_...) */
   apiKey: string;
@@ -11,6 +21,10 @@ export interface PosthogProviderProps {
   autocapture?: boolean;
   /** Disable GeoIP resolution */
   disableGeoip?: boolean;
+  /** Enable session replay. When false, recording is disabled and you can start it manually with startSessionRecording(). */
+  enableSessionReplay?: boolean;
+  /** Session replay masking/config. Only used when enableSessionReplay is true. */
+  sessionReplayConfig?: SessionReplayConfig;
   /** Additional options passed to posthog.init() */
   options?: Record<string, unknown>;
   children: React.ReactNode;

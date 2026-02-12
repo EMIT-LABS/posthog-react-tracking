@@ -33,6 +33,23 @@ yarn add react
 npm install react
 ```
 
+### Vite: "Cannot read properties of null (reading 'useContext')"
+
+If you see this error (often in React Router’s `Meta` or similar), the app is loading more than one copy of React (e.g. from the library’s `node_modules`). Force a single React instance in your app:
+
+**vite.config.ts** (or **vite.config.js**):
+
+```ts
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  resolve: {
+    dedupe: ['react', 'react-dom'],
+  },
+  // ... rest of config
+});
+```
+
 ---
 
 ## 2. Environment variables
@@ -78,7 +95,7 @@ import App from "./App";
 import {
   PosthogProvider,
   DEFAULT_HOST,
-} from "@Emit-Labs/posthog-react-tracking"; 
+} from "@Emit-Labs/posthog-react-tracking";
 
 const apiKey = process.env.POSTHOG_API_KEY ?? ""; // or VITE_/NEXT_PUBLIC_/REACT_APP_ variant
 const host = process.env.POSTHOG_HOST ?? DEFAULT_HOST;
@@ -105,7 +122,40 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 - `debug` (optional): enable debug logs
 - `autocapture` (optional): enable/disable PostHog autocapture
 - `disableGeoip` (optional): disable GeoIP resolution
+- `enableSessionReplay` (optional): when `true`, session recording is enabled; when `false`, it is disabled (you can still start it later via `usePosthogSessionReplay().startRecording()`)
+- `sessionReplayConfig` (optional): masking options when session replay is enabled: `maskAllInputs`, `maskTextSelector`, `blockSelector` (e.g. `'img'` to mask images)
 - `options` (optional): extra options forwarded to `posthog.init(...)`
+
+### Session replay
+
+To start recording when the app loads, render `PosthogSessionReplayStarter` inside the provider (same pattern as React Native):
+
+```tsx
+<PosthogProvider
+  apiKey={apiKey}
+  host={host}
+  enableSessionReplay={true}
+  sessionReplayConfig={{
+    maskAllInputs: false,
+    blockSelector: null, // or 'img' to mask images
+  }}
+>
+  <PosthogSessionReplayStarter />
+  <App />
+</PosthogProvider>
+```
+
+To control recording programmatically, use `usePosthogSessionReplay()`:
+
+```tsx
+import { usePosthogSessionReplay } from "@Emit-Labs/posthog-react-tracking";
+
+function MyComponent() {
+  const { startRecording, stopRecording, isRecording, isInitialized } = usePosthogSessionReplay();
+  // startRecording(), stopRecording(), isRecording() — same API as React Native
+  // pauseRecording/resumeRecording are no-ops on web (posthog-js does not support them)
+}
+```
 
 ---
 
