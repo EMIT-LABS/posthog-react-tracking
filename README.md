@@ -23,14 +23,14 @@ yarn add git+ssh://git@github.com:<your-org>/<your-repo>.git#main
 npm install git+ssh://git@github.com:<your-org>/<your-repo>.git#main
 ```
 
-### Peer dependencies
+### Peer dependency
 
-In your **app**, make sure you also have:
+In your **app**, make sure you also have `react` installed:
 
 ```bash
-yarn add react posthog-js
+yarn add react
 # or
-npm install react posthog-js
+npm install react
 ```
 
 ---
