@@ -1,4 +1,4 @@
-# @macro-meals/posthog-react-tracking
+# @Emit-Labs/posthog-react-tracking
 
 React (web) PostHog tracking library with an API aligned to your existing **`posthog_service`** (React Native) package.
 
