@@ -1,5 +1,5 @@
 {
-  "name": "@macro-meals/posthog-react-tracking",
+  "name": "@Emit-Labs/posthog-react-tracking",
   "version": "1.0.0",
   "description": "React (web) PostHog tracking library — Provider and usePosthog hook",
   "main": "dist/index.js",

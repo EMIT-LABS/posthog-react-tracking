@@ -1,6 +1,6 @@
 # @Emit-Labs/posthog-react-tracking
 
-React (web) PostHog tracking library with an API aligned to your existing **`posthog_service`** (React Native) package.
+React (web) PostHog tracking library.
 
 It provides:
 
@@ -78,7 +78,7 @@ import App from "./App";
 import {
   PosthogProvider,
   DEFAULT_HOST,
-} from "@macro-meals/posthog-react-tracking";
+} from "@Emit-Labs/posthog-react-tracking"; 
 
 const apiKey = process.env.POSTHOG_API_KEY ?? ""; // or VITE_/NEXT_PUBLIC_/REACT_APP_ variant
 const host = process.env.POSTHOG_HOST ?? DEFAULT_HOST;
@@ -114,7 +114,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 In any component under `PosthogProvider`:
 
 ```tsx
-import { usePosthog } from "@macro-meals/posthog-react-tracking";
+import { usePosthog } from "@Emit-Labs/posthog-react-tracking";
 
 function MyScreen() {
   const posthog = usePosthog();
@@ -212,7 +212,7 @@ You can standardize screen/page tracking:
 
 ```tsx
 import { useEffect } from "react";
-import { usePosthog } from "@macro-meals/posthog-react-tracking";
+import { usePosthog } from "@Emit-Labs/posthog-react-tracking";
 
 function Screen({
   name,
