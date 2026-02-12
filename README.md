@@ -13,14 +13,14 @@ Under the hood it uses [`posthog-js`](https://posthog.com/docs/libraries/js).
 
 ## 1. Installation
 
-Install from your Git host (adjust the URL/branch to match your repo):
+Install from GitHub:
 
 ```bash
 # Yarn
-yarn add git+ssh://git@github.com:<your-org>/<your-repo>.git#main
+yarn add git+ssh://git@github.com:EMIT-LABS/posthog-react-tracking.git#main
 
 # or npm
-npm install git+ssh://git@github.com:<your-org>/<your-repo>.git#main
+npm install git+ssh://git@github.com:EMIT-LABS/posthog-react-tracking.git#main
 ```
 
 ### Peer dependency
