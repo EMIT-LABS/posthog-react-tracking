@@ -13,15 +13,27 @@ Under the hood it uses [`posthog-js`](https://posthog.com/docs/libraries/js).
 
 ## 1. Installation
 
-Install from GitHub:
+Install from GitHub. **Use the HTTPS URL in CI/deployment** (e.g. Vercel, Netlify, Docker); those environments usually don’t have `ssh`, so `git+ssh://` will fail with “ssh: not found”.
 
 ```bash
-# Yarn
-yarn add git+ssh://git@github.com:EMIT-LABS/posthog-react-tracking.git#main
+# HTTPS (works in CI/deploy and locally; use this in package.json for deploys)
+yarn add git+https://github.com/EMIT-LABS/posthog-react-tracking.git#main
+# or
+npm install git+https://github.com/EMIT-LABS/posthog-react-tracking.git#main
 
-# or npm
+# SSH (local dev only, if you use SSH keys)
+yarn add git+ssh://git@github.com:EMIT-LABS/posthog-react-tracking.git#main
+# or
 npm install git+ssh://git@github.com:EMIT-LABS/posthog-react-tracking.git#main
 ```
+
+**If your lockfile keeps showing `resolved: "git+ssh://..."`** even though `package.json` has `git+https://...`, that happens when Git is configured to rewrite HTTPS to SSH (e.g. `url.https://github.com/.insteadOf`). npm then stores the URL Git actually used. To avoid SSH entirely in the lockfile and in CI, use the **tarball URL** in your app's `package.json`:
+
+```json
+"@Emit-Labs/posthog-react-tracking": "https://github.com/EMIT-LABS/posthog-react-tracking/archive/refs/heads/main.tar.gz"
+```
+
+Then run `npm install` (or `yarn`) and commit the updated lockfile. The lockfile will resolve to that HTTPS tarball, so CI and deployment work without SSH.
 
 ### Peer dependency
 
