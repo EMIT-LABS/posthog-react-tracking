@@ -2,10 +2,13 @@
 
 React (web) PostHog tracking library.
 
+**Version:** `1.1.0` · **Depends on:** [`posthog-js`](https://posthog.com/docs/libraries/js) `^1.418.7` (aligned with `@posthog/react@1.10.4`) · **Changelog:** [CHANGELOG.md](./CHANGELOG.md)
+
 It provides:
 
 - `PosthogProvider` – initializes `posthog-js` once and exposes it via React context
 - `usePosthog` – a hook exposing a **comprehensive PostHog API** (`track`, `identify`, super-properties, feature flags, consent, etc.)
+- `usePosthogSessionReplay` / `PosthogSessionReplayStarter` – session replay controls for web
 
 Under the hood it uses [`posthog-js`](https://posthog.com/docs/libraries/js).
 
@@ -311,7 +314,7 @@ if (!posthog.isInitialized) {
 
 ---
 
-## 6. Build & distribution
+## 6. Build, test & distribution
 
 ### Local build
 
@@ -335,11 +338,22 @@ The library’s `package.json` should point:
 - `"module": "dist/index.mjs"`
 - `"types": "dist/index.d.ts"`
 
+### Development / tests
+
+```bash
+npm test                 # run unit tests once
+npm run test:watch       # watch mode
+npm run test:coverage    # Vitest + V8 coverage (thresholds ~80%)
+npm run build            # tsup build to dist/
+```
+
 ### Consuming from another project
 
-1. Add this repo as a dependency (Git URL or published package).
-2. Ensure `react` and `posthog-js` are installed in the consuming app.
+1. Add this repo as a dependency (Git URL, tag, or tarball — see Installation).
+2. Ensure `react` is installed in the consuming app (`posthog-js` comes with this package).
 3. Wrap your root component tree in `PosthogProvider` with your `POSTHOG_API_KEY` and `POSTHOG_HOST`.
 4. Use `usePosthog()` wherever you currently use the mobile `posthog_service` hook; the API is intentionally mirrored for easier cross‑platform reuse.
+
+See [CHANGELOG.md](./CHANGELOG.md) for version history. Optional: tag releases as `v1.1.0` on GitHub so consumers can pin `...git#v1.1.0`.
 
 ---
